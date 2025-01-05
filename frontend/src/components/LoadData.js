@@ -1,11 +1,6 @@
-
 import React from 'react'
 import Plot from 'react-plotly.js';
 import config from '../../package.json';
-
-
-
-
 
 class LoadData extends React.Component{
 
@@ -18,62 +13,73 @@ class LoadData extends React.Component{
 
 
 
-    constructor(props){
-        super(props)
-        var ModifierFlags=this.props.ModifierFlags
-        var date=this.props.date
-        if (date!=null){
-            var ar=date.split("-")
-            var a=ar.map((a)=>  { return Number(a)})
-            date=a[0].toString()+"-"+a[1].toString()
-            ModifierFlags=ModifierFlags+1
+    constructor(props) {
+        super(props);
+    
+        let ModifierFlags = this.props.ModifierFlags;
+        let date = this.props.date;
+    
+        if (date != null) {
+            const ar = date.split("-");
+            const a = ar.map((val) => Number(val));
+            date = `${a[0]}-${a[1]}`;
+            ModifierFlags = ModifierFlags + 1;
         }
-        
-        this.state={
-            txt:"asdasdasdsasdasad",
-            
-            url:config.proxy+"https://liftoff-service.azurewebsites.net/unity/v0.5/GetCommunityLeaderboard.php",
-            body:"{\"LeaderboardKeyword\":{\"ContentId\":\""+
-            this.props.ContentId+"\",\"GamemodeFlags\":\""+
-            this.props.GamemodeFlags+"\",\"ModifierFlags\":\""+
-            ModifierFlags+"\",\"Timestamp\":\""+
-            date+"\"},\"PlatformName\":\"steam\",\"FetchAllEntries\":true,\"FetchUserEntries\":[\""+
-            this.props.FetchUserEntries+"\"]}",
-            response:{},
-            num_bins:50,
-        }
+    
+        this.state = {
+            url: "/api/unity/v0.5/GetCommunityLeaderboard.php", // Updated URL to use the proxy
+            body: JSON.stringify({
+                LeaderboardKeyword: {
+                    ContentId: this.props.ContentId,
+                    GamemodeFlags: this.props.GamemodeFlags,
+                    ModifierFlags: ModifierFlags,
+                    Timestamp: date
+                },
+                PlatformName: "steam",
+                FetchAllEntries: true,
+                FetchUserEntries: [this.props.FetchUserEntries]
+            }),
+            response: {},
+            num_bins: 50
+        };
+    
         this.load_leaderboard = this.load_leaderboard.bind(this);
 
-
     
     }
 
-    async load_leaderboard(url,body){
-    var myHeaders = new Headers();
-    myHeaders.append("Accept", "*/*");
-    myHeaders.append("RequestId", "0");
-    myHeaders.append("GameVersion", "1.5.1");
-    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-    myHeaders.append("X-Unity-Version", "2021.3.16f1");
+    async load_leaderboard(url, body) {
+    const myHeaders = new Headers({
+        "Host": "liftoff-pro-service.westeurope.cloudapp.azure.com",
+        "User-Agent": "UnityPlayer/2022.3.50f1 (UnityWebRequest/1.0, libcurl/8.5.0-DEV)",
+        "Accept": "*/*",
+        "Accept-Encoding": "deflate, gzip",
+        "RequestId": "0",
+        "GameVersion": "1.6.8",
+        "Application": "liftoff-fpv",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-Unity-Version": "2022.3.50f1"
+    });
 
-
-    
-    var requestOptions = {
-    method: 'POST',
-    headers: myHeaders,
-    body: body,
-    redirect: 'follow'
+    const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: body,
+        redirect: "follow"
     };
 
-    fetch(url, requestOptions)
-    .then(response => response.text())
-    .then(result => {
-
-        this.setState({data: JSON.parse(result)})
-    })
-    .catch(error => console.log('error', error));
-    
+    try {
+        const response = await fetch(url, requestOptions);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const result = await response.json();
+        this.setState({ data: result });
+    } catch (error) {
+        console.error("Error fetching leaderboard:", error);
     }
+}
+
 
 
 
@@ -264,7 +270,4 @@ class LoadData extends React.Component{
 }
 
 
-
-
-
-export default LoadData
+export default LoadData;
