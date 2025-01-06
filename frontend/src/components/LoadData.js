@@ -69,6 +69,7 @@ class LoadData extends React.Component{
     };
 
     try {
+		debugger;
         const response = await fetch(url, requestOptions);
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
