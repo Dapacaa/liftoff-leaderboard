@@ -22,15 +22,14 @@ const Modal = ({ handleClose, show, children }) => {
   );
 };
 
-
-
 class Grid extends React.Component{
-
 
   constructor(props) {
     super(props);
     var arr = new Array(this.props.tracks.length).fill(null);
     this.state = {
+      bg: 'url("https://i.imgur.com/w4bt3MG.png")',
+      initLoad: false,
       showPopup: false,
       ContentId:null,
       GamemodeFlags:null,
@@ -70,12 +69,12 @@ class Grid extends React.Component{
     });
   }
 
-  
-  render(){
-        return (
-          
-          <div className='pippo' style={{ backgroundImage :'url("'+packageJson.homepage+'images/'+this.props.map_name + '.jpg")'}}>
 
+
+  render(){
+    
+    return (
+          <div className='pippo' style={{ backgroundImage: this.state.bg}}>
               
 
               {this.state.showPopup &&
@@ -183,6 +182,7 @@ class Grid extends React.Component{
           </div>
           </div>
         );
+        
     }
   }
 

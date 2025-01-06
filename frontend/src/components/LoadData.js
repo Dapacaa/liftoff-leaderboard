@@ -1,7 +1,7 @@
 import React from 'react'
 import Plot from 'react-plotly.js';
 import config from '../../package.json';
-
+console.log(__dirname)
 class LoadData extends React.Component{
 
 
@@ -74,6 +74,7 @@ class LoadData extends React.Component{
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const result = await response.json();
+        console.log(result)
         this.setState({ data: result });
     } catch (error) {
         console.error("Error fetching leaderboard:", error);
@@ -259,7 +260,7 @@ class LoadData extends React.Component{
         { !this.state.data &&
 
         
-        <img src="https://media.tenor.com/u8sdX3dcszgAAAAC/homer-running.gif" alt="stupid homer"/>
+        <img src='https://i.giphy.com/SYvIZe4FMsLCkt00aZ.webp' alt=""></img>
         }
         {text}
 
