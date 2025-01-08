@@ -52,8 +52,18 @@
     <option value="SURTUR">SURTUR</option></select>
     <label for="raceDropdown" style="margin-left: 20px;">Choose a Race:</label>
     <select id="raceDropdown" disabled onchange="getSelectedRaceID()" required>
-        <option value="">--Select a Race--</option>
+      <option value="">--Select a Race--</option>
     </select>
+    <label for="quantity">Qty:</label>
+  <input 
+  type="number" 
+  id="quantity" 
+  name="quantity" 
+  value="10" 
+  min="1" 
+  max="250" 
+  oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 3);" 
+  required>
   </center><br>
     <div class="leaderboard" id="leaderboard">
       <div class="entry">
@@ -292,7 +302,8 @@ global_data.selectedRaceID = "";
 
 //global_data.response; 
 
-async function fetchLeaderboard(mapId,qty) {
+async function fetchLeaderboard(mapId) {
+var qty = document.getElementById("quantity").value;
   //debugger;
     const url = '/api/unity/v0.5/GetCommunityLeaderboard.php';
     const body = JSON.stringify({

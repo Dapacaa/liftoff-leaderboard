@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: black;
 }
 
 code {
@@ -30,6 +31,7 @@ code {
 body,
 html,
 #root {
+  background-color: black;
   height: 100%;
 }
 
@@ -55,6 +57,7 @@ html,
 
   /* Prevent scrolling */
   background-attachment: fixed;
+  background-color: black;
 }
 
 
