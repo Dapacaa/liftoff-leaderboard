@@ -9,4 +9,14 @@ module.exports = function (app) {
             pathRewrite: { '^/api': '' }
         })
     );
+    
+    app.use(
+        '/steam-api',
+        createProxyMiddleware({
+            target: 'https://api.steampowered.com',
+            changeOrigin: true,
+            pathRewrite: { '^/steam-api': '' }
+        })
+    );
 };
+    

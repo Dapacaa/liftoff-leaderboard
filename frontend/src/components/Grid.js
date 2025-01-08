@@ -94,157 +94,164 @@ class Grid extends React.Component {
                 </Modal>
             )}
 
-            <div className="container-lg">
-                <div className="row">
-                    {/* Map over the tracks array and create a card for each track */}
-                    {this.props.tracks.map((item, index) => (
-                        <div
-                            key={index}
-                            style={{ height: "300px", width: "400px", margin: "5px" }}
-                            className="col-xl-4 col-md-6 col-xxl-3"
-                        >
-                            <Card>
-                                <Card.Body>
-                                    <Card.Title>{item.name}</Card.Title>
-                                    <div className="row">
-                                        {/* Left column: Labels for the track stats */}
-                                        <div className="col-sm-6">
-                                            <p>Leaderboard date</p>
-                                            <p>Best race times</p>
-                                            <p>Best lap times</p>
-                                            <p>Best race times (purist)</p>
-                                            <p>Best lap times (purist)</p>
-                                        </div>
-
-                                        {/* Right column: Interactive inputs and buttons */}
-                                        <div className="col-sm-6">
-                                            {/* If a date is selected, show the input field */}
-                                            {this.state.date_array[index] != null && (
-                                                <p>
-                                                    <input
-                                                        className="LeaderboardDate"
-                                                        type="month"
-                                                        id="start"
-                                                        name="start"
-                                                        defaultValue={this.state.date_array[index]}
-                                                        onChange={(event) => {
-                                                            // Update the date_array state with the new value
-                                                            const tmp = [...this.state.date_array];
-                                                            tmp[index] = event.target.value;
-
-                                                            // If the input is cleared, set the value to null
-                                                            if (event.target.value === "") {
-                                                                tmp[index] = null;
-                                                            }
-                                                            this.setState({ date_array: tmp });
-                                                        }}
-                                                    />
-                                                </p>
-                                            )}
-
-                                            {/* If no date is selected, show the dropdown menu */}
-                                            {this.state.date_array[index] === null && (
-                                                <p>
-                                                    <select
-                                                        defaultValue={1}
-                                                        onChange={(event) => {
-                                                            if (event.target.value === "2") {
-                                                                const tmp = [...this.state.date_array];
-                                                                tmp[index] = "";
-                                                                this.setState({ date_array: tmp });
-                                                            }
-                                                        }}
-                                                    >
-                                                        <option value="1">All time</option>
-                                                        <option value="2">Pick a date</option>
-                                                    </select>
-                                                </p>
-                                            )}
-
-                                            {/* Buttons to view track data */}
-                                            <p>
-                                                <Button
-                                                    className="BestRaceTimes"
-                                                    variant="primary"
-                                                    size="sm"
-                                                    onClick={() =>
-                                                        this.openPopupHandler({
-                                                            pressedButton: "Best Race Times",
-                                                            date: this.state.date_array[index],
-                                                            GamemodeFlags: 1,
-                                                            ModifierFlags: 0,
-                                                            track: item,
-                                                        })
-                                                    }
-                                                >
-                                                    view
-                                                </Button>
-                                            </p>
-                                            <p>
-                                                <Button
-                                                    className="BestLapTimes"
-                                                    variant="primary"
-                                                    size="sm"
-                                                    onClick={() =>
-                                                        this.openPopupHandler({
-                                                            pressedButton: "Best Lap Times",
-                                                            date: this.state.date_array[index],
-                                                            GamemodeFlags: 2,
-                                                            ModifierFlags: 0,
-                                                            track: item,
-                                                        })
-                                                    }
-                                                >
-                                                    view
-                                                </Button>
-                                            </p>
-                                            <p>
-                                                <Button
-                                                    className="BestRaceTimesPurist"
-                                                    variant="primary"
-                                                    size="sm"
-                                                    onClick={() =>
-                                                        this.openPopupHandler({
-                                                            pressedButton: "Best Race Times Purist",
-                                                            date: this.state.date_array[index],
-                                                            GamemodeFlags: 1,
-                                                            ModifierFlags: 2,
-                                                            track: item,
-                                                        })
-                                                    }
-                                                >
-                                                    view
-                                                </Button>
-                                            </p>
-                                            <p>
-                                                <Button
-                                                    className="BestLapTimesPurist"
-                                                    variant="primary"
-                                                    size="sm"
-                                                    onClick={() =>
-                                                        this.openPopupHandler({
-                                                            pressedButton: "Best Lap Times Purist",
-                                                            date: this.state.date_array[index],
-                                                            GamemodeFlags: 2,
-                                                            ModifierFlags: 2,
-                                                            track: item,
-                                                        })
-                                                    }
-                                                >
-                                                    view
-                                                </Button>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </Card.Body>
-                            </Card>
-                        </div>
-                    ))}
-                </div>
-            </div>
+           
+            
         </div>
     );
 
     } 
   }
     export default Grid;
+
+
+    
+    //  <div className="container-lg">
+    //             <div className="row">
+    //                 {/* Map over the tracks array and create a card for each track */}
+    //                 {this.props.tracks.map((item, index) => (
+    //                     <div
+    //                         key={index}
+    //                         style={{ height: "300px", width: "400px", margin: "5px" }}
+    //                         className="col-xl-4 col-md-6 col-xxl-3"
+    //                     >
+    //                         <Card>
+    //                             <Card.Body>
+    //                                 <Card.Title>{item.name}</Card.Title>
+    //                                 <div className="row">
+    //                                     {/* Left column: Labels for the track stats */}
+    //                                     <div className="col-sm-6">
+    //                                         <p>Leaderboard date</p>
+    //                                         <p>Best race times</p>
+    //                                         <p>Best lap times</p>
+    //                                         <p>Best race times (purist)</p>
+    //                                         <p>Best lap times (purist)</p>
+    //                                     </div>
+
+    //                                     {/* Right column: Interactive inputs and buttons */}
+    //                                     <div className="col-sm-6">
+    //                                         {/* If a date is selected, show the input field */}
+    //                                         {this.state.date_array[index] != null && (
+    //                                             <p>
+    //                                                 <input
+    //                                                     className="LeaderboardDate"
+    //                                                     type="month"
+    //                                                     id="start"
+    //                                                     name="start"
+    //                                                     defaultValue={this.state.date_array[index]}
+    //                                                     onChange={(event) => {
+    //                                                         // Update the date_array state with the new value
+    //                                                         const tmp = [...this.state.date_array];
+    //                                                         tmp[index] = event.target.value;
+
+    //                                                         // If the input is cleared, set the value to null
+    //                                                         if (event.target.value === "") {
+    //                                                             tmp[index] = null;
+    //                                                         }
+    //                                                         this.setState({ date_array: tmp });
+    //                                                     }}
+    //                                                 />
+    //                                             </p>
+    //                                         )}
+
+    //                                         {/* If no date is selected, show the dropdown menu */}
+    //                                         {this.state.date_array[index] === null && (
+    //                                             <p>
+    //                                                 <select
+    //                                                     defaultValue={1}
+    //                                                     onChange={(event) => {
+    //                                                         if (event.target.value === "2") {
+    //                                                             const tmp = [...this.state.date_array];
+    //                                                             tmp[index] = "";
+    //                                                             this.setState({ date_array: tmp });
+    //                                                         }
+    //                                                     }}
+    //                                                 >
+    //                                                     <option value="1">All time</option>
+    //                                                     <option value="2">Pick a date</option>
+    //                                                 </select>
+    //                                             </p>
+    //                                         )}
+
+    //                                         {/* Buttons to view track data */}
+    //                                         <p>
+    //                                             <Button
+    //                                                 className="BestRaceTimes"
+    //                                                 variant="primary"
+    //                                                 size="sm"
+    //                                                 onClick={() =>
+    //                                                     this.openPopupHandler({
+    //                                                         pressedButton: "Best Race Times",
+    //                                                         date: this.state.date_array[index],
+    //                                                         GamemodeFlags: 1,
+    //                                                         ModifierFlags: 0,
+    //                                                         track: item,
+    //                                                     })
+    //                                                 }
+    //                                             >
+    //                                                 view
+    //                                             </Button>
+    //                                         </p>
+    //                                         <p>
+    //                                             <Button
+    //                                                 className="BestLapTimes"
+    //                                                 variant="primary"
+    //                                                 size="sm"
+    //                                                 onClick={() =>
+    //                                                     this.openPopupHandler({
+    //                                                         pressedButton: "Best Lap Times",
+    //                                                         date: this.state.date_array[index],
+    //                                                         GamemodeFlags: 2,
+    //                                                         ModifierFlags: 0,
+    //                                                         track: item,
+    //                                                     })
+    //                                                 }
+    //                                             >
+    //                                                 view
+    //                                             </Button>
+    //                                         </p>
+    //                                         <p>
+    //                                             <Button
+    //                                                 className="BestRaceTimesPurist"
+    //                                                 variant="primary"
+    //                                                 size="sm"
+    //                                                 onClick={() =>
+    //                                                     this.openPopupHandler({
+    //                                                         pressedButton: "Best Race Times Purist",
+    //                                                         date: this.state.date_array[index],
+    //                                                         GamemodeFlags: 1,
+    //                                                         ModifierFlags: 2,
+    //                                                         track: item,
+    //                                                     })
+    //                                                 }
+    //                                             >
+    //                                                 view
+    //                                             </Button>
+    //                                         </p>
+    //                                         <p>
+    //                                             <Button
+    //                                                 className="BestLapTimesPurist"
+    //                                                 variant="primary"
+    //                                                 size="sm"
+    //                                                 onClick={() =>
+    //                                                     this.openPopupHandler({
+    //                                                         pressedButton: "Best Lap Times Purist",
+    //                                                         date: this.state.date_array[index],
+    //                                                         GamemodeFlags: 2,
+    //                                                         ModifierFlags: 2,
+    //                                                         track: item,
+    //                                                     })
+    //                                                 }
+    //                                             >
+    //                                                 view
+    //                                             </Button>
+    //                                         </p>
+    //                                     </div>
+    //                                 </div>
+    //                             </Card.Body>
+    //                         </Card>
+    //                     </div>
+    //                 ))}
+    //             </div>
+    //         </div>
+
+    
